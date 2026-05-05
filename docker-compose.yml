@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  next-app:
+    image: ghcr.io/srisri8888/next-app:latest
+    container_name: next-app
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30
+    restart: unless-stopped
