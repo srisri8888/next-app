@@ -1,8 +1,12 @@
-name: Build Docker Image
+name: Build and Push Docker Image
 
 on:
   push:
     branches: [ "main" ]
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   build:
@@ -12,25 +16,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Use Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install deps
-        run: npm ci
-
-      - name: Build app
-        run: npm run build
-
-      - name: Build Docker image
-        run: docker build -t next-app .
-        
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker image
-        run: docker build -t ghcr.io/${{ github.repository }}/next-app:latest .
+        run: docker build -t ghcr.io/srisri8888/next-app:latest .
 
       - name: Push Docker image
-        run: docker push ghcr.io/${{ github.repository }}/next-app:latest
+        run: docker push ghcr.io/srisri8888/next-app:latest
