@@ -8,7 +8,7 @@ export default async function Page() {
 
   return (
     <div>
-      <h1>Next.js Full Stack</h1>
+      <h1>Next.js Full Stack Development</h1>
       <p>{data.message}</p>
     </div>
   );
