@@ -7,11 +7,3 @@ services:
     ports:
       - "3000:3000"
     restart: unless-stopped
-
-  watchtower:
-    image: containrrr/watchtower
-    container_name: watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30
-    restart: unless-stopped
